@@ -1,0 +1,139 @@
+.. image:: _static/masthead.png
+   :align: center
+
+==========================================
+Passlib |release| documentation
+==========================================
+
+.. only:: devcopy
+
+   .. warning::
+
+        This is the documentation for a development version of Passlib.
+        For documentation of the latest stable version,
+        see `<https://pythonhosted.com/passlib>`_.
+
+Welcome
+=======
+Passlib is a password hashing library for Python 2 & 3, which provides
+cross-platform implementations of over 30 password hashing algorithms, as well
+as a framework for managing existing password hashes. It's designed to be useful
+for a wide range of tasks, from verifying a hash found in /etc/shadow, to
+providing full-strength password hashing for multi-user application.
+
+As a quick sample, the following code hashes and then verifies a password
+using the :doc:`PBKDF2-SHA256 </lib/passlib.hash.pbkdf2_digest>` algorithm::
+
+    >>> # import the hash algorithm
+    >>> from passlib.hash import pbkdf2_sha256
+
+    >>> # generate new salt, and hash a password
+    >>> hash = pbkdf2_sha256.hash("toomanysecrets")
+    >>> hash
+    '$pbkdf2-sha256$29000$N2YMIWQsBWBMae09x1jrPQ$1t8iyB2A.WF/Z5JZv.lfCIhXXN33N23OSgQYThBYRfk'
+
+    >>> # verifying the password
+    >>> pbkdf2_sha256.verify("toomanysecrets", hash)
+    True
+    >>> pbkdf2_sha256.verify("joshua", hash)
+    False
+
+Content Summary
+===============
+
+.. rst-class:: float-right inline-title
+
+.. seealso:: :ref:`What's new in Passlib 1.7 <whats-new>`
+
+Introductory Materials
+----------------------
+
+    :doc:`install`
+        requirements & installation instructions
+
+    :doc:`overview`
+        describes how Passlib is laid out
+
+    :doc:`New Application Quickstart <new_app_quickstart>`
+        choosing a password hash for new applications
+
+----
+
+Password Hashing Algorithms
+---------------------------
+    :mod:`passlib.hash`
+        all the password hashes supported by Passlib --
+            - :doc:`Overview <lib/passlib.hash>`
+            - :ref:`mcf-hashes`
+            - :ref:`ldap-hashes`
+            - :ref:`database-hashes`
+            - :ref:`windows-hashes`
+            - :ref:`other-hashes`
+
+    :doc:`PasswordHash interface <password_hash_api>`
+        examples & documentation of the common hash interface
+        used by all the hash algorithms in Passlib.
+
+CryptContext Objects
+--------------------
+    :mod:`passlib.context`
+        provides the :class:`!CryptContext` class, a flexible container
+        for managing and migrating between multiple hash algorithms.
+
+    :mod:`passlib.apps`
+        predefined CryptContext objects for managing the hashes used by
+        MySQL, PostgreSQL, OpenLDAP, and others applications.
+
+    :mod:`passlib.hosts`
+        predefined CryptContext objects for managing the hashes
+        found in Linux & BSD "shadow" files.
+
+Application Helpers
+-------------------
+    :mod:`passlib.apache`
+        classes for manipulating Apache's ``htpasswd`` and ``htdigest`` files.
+
+    :mod:`passlib.ext.django`
+        Django plugin which monkeypatches support for (almost) any hash in Passlib.
+
+    :mod:`passlib.pwd`
+        Password generation helpers.
+
+    :mod:`passlib.totp`
+        TOTP / Two Factor Authentication
+
+..
+    Support Modules
+    ---------------
+        :mod:`passlib.exc`
+
+            custom warnings and exceptions used by Passlib
+    :mod:`passlib.registry`
+    :mod:`passlib.utils`
+
+----
+
+Other Documents
+---------------
+    :doc:`modular_crypt_format`
+        reference listing "modular crypt format" support across Unix systems.
+
+    :doc:`Changelog <history>`
+        Passlib's release history
+
+Online Resources
+================
+
+    .. table::
+        :class: fullwidth
+        :column-alignment: lr
+
+        ================ ===================================================
+        Homepage:        `<https://bitbucket.org/ecollins/passlib>`_
+        Online Docs:     `<http://packages.python.org/passlib>`_
+        Discussion:      `<http://groups.google.com/group/passlib-users>`_
+        ---------------- ---------------------------------------------------
+        ---------------- ---------------------------------------------------
+        Downloads:       `<https://pypi.python.org/pypi/passlib>`_
+        Source:          `<https://bitbucket.org/ecollins/passlib/src>`_
+        ================ ===================================================
