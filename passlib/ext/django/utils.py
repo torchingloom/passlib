@@ -447,7 +447,10 @@ class DjangoContextAdapter(DjangoTranslator):
             self.get_user_category = get_user_category
 
         # install lru cache wrappers
-        from functools import lru_cache
+        try:
+            from django.utils.lru_cache import lru_cache
+        except (ModuleNotFoundError, ImportError):
+            from functools import lru_cache
         self.get_hashers = lru_cache()(self.get_hashers)
 
         # get copy of original make_password
